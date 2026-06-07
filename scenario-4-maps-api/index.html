@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scenario 4 — Address Autocomplete</title>
+    <style>
+      body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+      input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 8px; }
+      .hint { background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; font-size: 14px; }
+      .result-card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; margin-top: 16px; background: #f9f9f9; }
+      .result-card h4 { margin: 0 0 6px; }
+      .suggestions { border: 1px solid #ddd; border-radius: 0 0 6px 6px; border-top: none; }
+      .suggestion { padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px; }
+      .suggestion:last-child { border-bottom: none; }
+      .suggestion:hover { background: #f0f0ff; }
+      .no-results { padding: 10px 12px; color: #888; font-size: 14px; }
+      .error-state { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 6px; padding: 10px; color: #b91c1c; font-size: 14px; margin-top: 8px; }
+      h2 { color: #333; }
+      .status-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: bold; margin-left: 8px; }
+      .status-pill.ok { background: #dcfce7; color: #166534; }
+      .status-pill.warn { background: #fef3c7; color: #92400e; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
