@@ -1,8 +1,3 @@
-// AddressAutocomplete.tsx
-// This component uses (a mock of) Google Maps Places Autocomplete.
-// Client reports: "address autofill isn't working for some addresses"
-// TODO: Investigate — is this a code bug, a config issue, or something else?
-
 import { useEffect, useRef, useState } from 'react';
 import { getAutocompletePredictions, getPlaceDetails } from './mockGoogleMaps';
 import type { PlacePrediction } from './mockGoogleMaps';
@@ -25,12 +20,10 @@ export function AddressAutocomplete({ onAddressSelect }: AddressAutocompleteProp
       return;
     }
 
-    // Debounce API calls
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
       setLoading(true);
       try {
-        // TODO: What should happen when this returns an empty array?
         const predictions = await getAutocompletePredictions(inputValue);
         setSuggestions(predictions);
         setShowSuggestions(true);
@@ -49,7 +42,6 @@ export function AddressAutocomplete({ onAddressSelect }: AddressAutocompleteProp
         setInputValue(details.formatted_address);
         onAddressSelect(details.formatted_address);
       }
-      // TODO: What if formatted_address is undefined?
     } finally {
       setLoading(false);
     }
@@ -75,7 +67,6 @@ export function AddressAutocomplete({ onAddressSelect }: AddressAutocompleteProp
           ))}
         </div>
       )}
-      {/* TODO: What should show here when suggestions is empty after a search? */}
       {showSuggestions && suggestions.length === 0 && !loading && inputValue.length >= 3 && (
         <div className="no-results">No suggestions found</div>
       )}
