@@ -12,133 +12,65 @@
         color: #e2e8f0;
         min-height: 100vh;
         display: flex;
-        align-items: flex-start;
         justify-content: center;
         padding: 40px 16px;
       }
-      #root { width: 100%; max-width: 520px; }
+      .app { width: 100%; max-width: 640px; }
 
-      h2 {
-        font-size: 20px;
-        font-weight: 700;
-        color: #f1f5f9;
-        margin-bottom: 4px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .ai-badge {
-        background: #312e81;
-        color: #a5b4fc;
-        border-radius: 4px;
-        padding: 2px 8px;
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-      }
-      .subtitle {
-        font-size: 13px;
-        color: #64748b;
-        margin-bottom: 20px;
-      }
+      .app-header { margin-bottom: 6px; }
+      h2 { font-size: 22px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 10px; }
+      .ai-badge { background: #312e81; color: #a5b4fc; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+      .subtitle { font-size: 13px; color: #475569; margin-top: 4px; margin-bottom: 16px; }
 
       .hint {
-        background: #1e1b4b;
-        border: 1px solid #3730a3;
-        border-radius: 8px;
-        padding: 12px 14px;
-        margin-bottom: 20px;
-        font-size: 13px;
-        color: #a5b4fc;
-        line-height: 1.6;
+        background: #1e1b4b; border: 1px solid #3730a3; border-radius: 8px;
+        padding: 12px 14px; margin-bottom: 20px; font-size: 13px; color: #a5b4fc; line-height: 1.6;
       }
       .hint small { color: #6366f1; display: block; margin-top: 4px; }
 
-      .user-switcher {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 20px;
-      }
+      .user-switcher { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
       .user-switcher label { font-size: 13px; color: #94a3b8; }
       .user-switcher select {
-        background: #1e293b;
-        color: #e2e8f0;
-        border: 1px solid #334155;
-        border-radius: 6px;
-        padding: 6px 10px;
-        font-size: 13px;
-        cursor: pointer;
-        outline: none;
+        background: #1e293b; color: #e2e8f0; border: 1px solid #334155;
+        border-radius: 6px; padding: 6px 12px; font-size: 13px; cursor: pointer; outline: none;
       }
       .user-switcher select:focus { border-color: #6366f1; }
 
-      .notification-panel {
-        background: #1a1a24;
-        border: 1px solid #2d2d3d;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      .panel-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 18px;
-        border-bottom: 1px solid #2d2d3d;
-        background: #16161f;
-      }
-      .panel-header-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .panel-title { font-size: 15px; font-weight: 600; color: #f1f5f9; }
-      .badge {
-        background: #ef4444;
-        color: white;
-        border-radius: 999px;
-        padding: 2px 7px;
-        font-size: 11px;
-        font-weight: 700;
-      }
-      .panel-count { font-size: 12px; color: #475569; }
+      .inbox-panel { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; overflow: hidden; }
 
-      ul { list-style: none; }
-      li {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 13px 18px;
-        border-bottom: 1px solid #22222e;
-        cursor: pointer;
-        transition: background 0.15s;
-        font-size: 14px;
+      .inbox-header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 18px; border-bottom: 1px solid #2d2d3d; background: #16161f;
       }
-      li:last-child { border-bottom: none; }
-      li:hover { background: #1f1f2e; }
-      li.unread { color: #f1f5f9; }
-      li.unread::before {
-        content: '';
-        width: 7px;
-        height: 7px;
-        min-width: 7px;
-        border-radius: 50%;
-        background: #6366f1;
-        display: inline-block;
-      }
-      li.read { color: #475569; }
-      li.read::before {
-        content: '';
-        width: 7px;
-        height: 7px;
-        min-width: 7px;
-        border-radius: 50%;
-        background: #2d2d3d;
-        display: inline-block;
-      }
+      .inbox-header-left { display: flex; align-items: center; gap: 10px; }
+      .inbox-title { font-size: 15px; font-weight: 600; color: #f1f5f9; }
+      .badge { background: #6366f1; color: white; border-radius: 999px; padding: 2px 9px; font-size: 11px; font-weight: 600; }
+      .inbox-count { font-size: 12px; color: #475569; }
 
-      .loading { padding: 20px 18px; color: #475569; font-size: 14px; }
-      .empty { padding: 20px 18px; color: #475569; font-size: 14px; }
+      .email-list { list-style: none; }
+      .email-row {
+        display: flex; align-items: flex-start; gap: 12px;
+        padding: 14px 18px; border-bottom: 1px solid #1e1e2e;
+        cursor: pointer; transition: background 0.15s;
+      }
+      .email-row:last-child { border-bottom: none; }
+      .email-row:hover { background: #1f1f2e; }
+      .email-row.unread { background: #16162a; }
+      .email-row.read { opacity: 0.5; }
+
+      .email-dot {
+        width: 8px; height: 8px; min-width: 8px; border-radius: 50%;
+        margin-top: 5px;
+      }
+      .email-row.unread .email-dot { background: #6366f1; }
+      .email-row.read .email-dot { background: #2d2d3d; }
+
+      .email-content { flex: 1; min-width: 0; }
+      .email-subject { font-size: 14px; font-weight: 600; color: #f1f5f9; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .email-row.read .email-subject { font-weight: 400; color: #64748b; }
+      .email-body { font-size: 12px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+      .inbox-empty { padding: 24px 18px; color: #475569; font-size: 14px; }
     </style>
   </head>
   <body>

@@ -1,32 +1,32 @@
 import { useState } from 'react';
-import { NotificationBell } from './NotificationBell';
+import { EmailInbox } from './EmailInbox';
 
 export default function App() {
-  const [userId, setUserId] = useState('user-1');
+  const [userId, setUserId] = useState('1');
 
   return (
-    <div>
-      <h2>
-        🔔 Notification Center
-        <span className="ai-badge">AI-Generated</span>
-      </h2>
-      <p className="subtitle">Open the browser console and watch API call counts.</p>
+    <div className="app">
+      <div className="app-header">
+        <h2>Mail <span className="ai-badge">AI-Generated</span></h2>
+        <p className="subtitle">Open the browser console and watch API call counts.</p>
+      </div>
 
       <div className="hint">
-        Try switching users quickly, clicking notifications to mark as read, and leaving the tab open 30+ seconds.
-        <small>Mock API logs every fetch call — 30% failure rate on mark-as-read.</small>
+        Try switching users quickly, clicking emails to mark as read, and leaving the tab open 30+ seconds.
+        <small>Polls every 5s. 30% failure rate on mark-as-read. Watch the fetch count in the console.</small>
       </div>
 
       <div className="user-switcher">
-        <label>Switch user:</label>
+        <label>Inbox:</label>
         <select value={userId} onChange={(e) => setUserId(e.target.value)}>
-          <option value="user-1">User 1</option>
-          <option value="user-2">User 2</option>
-          <option value="user-3">User 3</option>
+          <option value="1">User 1</option>
+          <option value="2">User 2</option>
+          <option value="3">User 3</option>
+          <option value="4">User 4</option>
         </select>
       </div>
 
-      <NotificationBell userId={userId} />
+      <EmailInbox userId={userId} />
     </div>
   );
 }
