@@ -19,10 +19,16 @@ let fetchCount = 0;
  * Simulated GET /api/notifications/:userId
  * Occasionally returns data in a different shape to simulate API versioning.
  */
-export async function fetchNotifications(userId: string): Promise<Notification[]> {
+export async function fetchNotifications(userId: string, options?: { signal?: AbortSignal }): Promise<Notification[]> {
   fetchCount++;
   console.log(`[API] fetchNotifications called for ${userId} (total calls: ${fetchCount})`);
-  await new Promise((r) => setTimeout(r, 300));
+  await new Promise((r, reject) => {
+    const timeout = setTimeout(r, 300);
+    options?.signal?.addEventListener('abort', () => {
+      clearTimeout(timeout);
+      reject(new DOMException('Aborted', 'AbortError'));
+    });
+  });
   // Note: In production this might return { items: [...] } — shape can vary
   return [...notificationStore];
 }

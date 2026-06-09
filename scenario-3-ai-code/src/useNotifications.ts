@@ -21,6 +21,7 @@ export function useNotifications(userId: string) {
     }, 5000);
   }, [userId]);
 
+
   const markAsRead = useCallback((id: string) => {
     setNotifications((prev) =>
       prev.map((n) => (n.id === id ? { ...n, read: true } : n))
