@@ -1,26 +1,23 @@
 // NotificationBell.tsx
-// AI-generated component — works for the happy path.
-// TODO: Can you spot any issues here too?
-
 import { useNotifications } from './useNotifications';
 
 export function NotificationBell({ userId }: { userId: string }) {
   const { notifications, loading, unreadCount, markAsRead } = useNotifications(userId);
 
-  if (loading) return <span>Loading...</span>;
-
   return (
-    <div>
-      <div className="bell-area">
-        <button>
-          🔔 Notifications
+    <div className="notification-panel">
+      <div className="panel-header">
+        <div className="panel-header-left">
+          <span className="panel-title">Notifications</span>
           {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
-        </button>
-        <span className="status">{notifications.length} total</span>
+        </div>
+        <span className="panel-count">{notifications.length} total</span>
       </div>
 
-      {notifications.length === 0 ? (
-        <p>No notifications</p>
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : notifications.length === 0 ? (
+        <div className="empty">No notifications</div>
       ) : (
         <ul>
           {notifications.map((n) => (
@@ -31,7 +28,6 @@ export function NotificationBell({ userId }: { userId: string }) {
               title="Click to mark as read"
             >
               {n.message}
-              {!n.read && ' •'}
             </li>
           ))}
         </ul>
