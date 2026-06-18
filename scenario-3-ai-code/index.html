@@ -36,41 +36,41 @@
       }
       .user-switcher select:focus { border-color: #6366f1; }
 
-      .inbox-panel { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; overflow: hidden; }
+      .feed-panel { background: #1a1a24; border: 1px solid #2d2d3d; border-radius: 12px; overflow: hidden; }
 
-      .inbox-header {
+      .feed-header {
         display: flex; align-items: center; justify-content: space-between;
         padding: 14px 18px; border-bottom: 1px solid #2d2d3d; background: #16161f;
       }
-      .inbox-header-left { display: flex; align-items: center; gap: 10px; }
-      .inbox-title { font-size: 15px; font-weight: 600; color: #f1f5f9; }
+      .feed-header-left { display: flex; align-items: center; gap: 10px; }
+      .feed-title { font-size: 15px; font-weight: 600; color: #f1f5f9; }
       .badge { background: #6366f1; color: white; border-radius: 999px; padding: 2px 9px; font-size: 11px; font-weight: 600; }
-      .inbox-count { font-size: 12px; color: #475569; }
+      .feed-count { font-size: 12px; color: #475569; }
 
-      .email-list { list-style: none; }
-      .email-row {
+      .post-list { list-style: none; }
+      .post-row {
         display: flex; align-items: flex-start; gap: 12px;
         padding: 14px 18px; border-bottom: 1px solid #1e1e2e;
         cursor: pointer; transition: background 0.15s;
       }
-      .email-row:last-child { border-bottom: none; }
-      .email-row:hover { background: #1f1f2e; }
-      .email-row.unread { background: #16162a; }
-      .email-row.read { opacity: 0.5; }
+      .post-row:last-child { border-bottom: none; }
+      .post-row:hover { background: #1f1f2e; }
+      .post-row.unread { background: #16162a; }
+      .post-row.read { opacity: 0.5; }
 
-      .email-dot {
+      .post-dot {
         width: 8px; height: 8px; min-width: 8px; border-radius: 50%;
         margin-top: 5px;
       }
-      .email-row.unread .email-dot { background: #6366f1; }
-      .email-row.read .email-dot { background: #2d2d3d; }
+      .post-row.unread .post-dot { background: #6366f1; }
+      .post-row.read .post-dot { background: #2d2d3d; }
 
-      .email-content { flex: 1; min-width: 0; }
-      .email-subject { font-size: 14px; font-weight: 600; color: #f1f5f9; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .email-row.read .email-subject { font-weight: 400; color: #64748b; }
-      .email-body { font-size: 12px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .post-content { flex: 1; min-width: 0; }
+      .post-title-text { font-size: 14px; font-weight: 600; color: #f1f5f9; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .post-row.read .post-title-text { font-weight: 400; color: #64748b; }
+      .post-body-preview { font-size: 12px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-      .inbox-empty { padding: 24px 18px; color: #475569; font-size: 14px; }
+      .feed-empty { padding: 24px 18px; color: #475569; font-size: 14px; }
     </style>
   </head>
   <body>

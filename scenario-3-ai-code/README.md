@@ -1,8 +1,8 @@
-# Scenario 3 — Email Inbox
+# Scenario 3 — Post Feed
 
 ## Client Report
 
-> "We used Cursor to build the email inbox feature. It works most of the time, but our DevOps team flagged a memory leak — API calls keep growing over time. Also some users report emails don't refresh properly when switching inboxes. The AI wrote most of this and the code looks fine to us. Can you review it?"
+> "We used Cursor to build the post feed feature. It polls for the user's posts every 5 seconds and updates the feed. It works most of the time, but our DevOps team flagged a memory leak — API calls keep growing over time. Also some users report the feed doesn't refresh properly when switching users. The AI wrote most of this and the code looks fine to us. Can you review it?"
 
 ## Known Bugs (Interviewer Reference — Do Not Share)
 

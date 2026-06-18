@@ -1,26 +1,26 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export type Email = {
+export type Post = {
   id: number;
   userId: number;
-  subject: string;
+  title: string;
   body: string;
   read: boolean;
 };
 
-// Simulates marking an email as read — 30% chance of failure
-async function markEmailReadOnServer(id: number): Promise<void> {
+// Simulates marking a post as read — 30% chance of failure
+async function markPostReadOnServer(id: number): Promise<void> {
   await new Promise((r) => setTimeout(r, 200));
   if (Math.random() < 0.3) {
-    throw new Error(`Server error: failed to mark email ${id} as read`);
+    throw new Error(`Server error: failed to mark post ${id} as read`);
   }
-  console.log(`[API] Marked email ${id} as read`);
+  console.log(`[API] Marked post ${id} as read`);
 }
 
 let fetchCount = 0;
 
-export function useEmails(userId: string) {
-  const [emails, setEmails] = useState<Email[]>([]);
+export function usePosts(userId: string) {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,16 +31,16 @@ export function useEmails(userId: string) {
       .then((res) => res.json())
       .then((data) => {
         fetchCount++;
-        console.log(`[API] fetchEmails for user ${userId} (total fetches: ${fetchCount})`);
+        console.log(`[API] fetchPosts for user ${userId} (total fetches: ${fetchCount})`);
         // BUG 5: Blindly trusts API shape — no validation
-        const mapped: Email[] = data.map((p: any) => ({
+        const mapped: Post[] = data.map((p: any) => ({
           id: p.id,
           userId: p.userId,
-          subject: p.title,
+          title: p.title,
           body: p.body,
           read: false,
         }));
-        setEmails(mapped);
+        setPosts(mapped);
         setLoading(false);
       });
     // BUG 3: No .catch — if fetch fails, loading hangs forever
@@ -51,29 +51,29 @@ export function useEmails(userId: string) {
         .then((res) => res.json())
         .then((data) => {
           fetchCount++;
-          console.log(`[API] poll fetchEmails for user ${userId} (total fetches: ${fetchCount})`);
-          const mapped: Email[] = data.map((p: any) => ({
+          console.log(`[API] poll fetchPosts for user ${userId} (total fetches: ${fetchCount})`);
+          const mapped: Post[] = data.map((p: any) => ({
             id: p.id,
             userId: p.userId,
-            subject: p.title,
+            title: p.title,
             body: p.body,
             read: false,
           }));
-          setEmails(mapped);
+          setPosts(mapped);
         });
     }, 5000);
   }, [userId]);
 
   // BUG 4: Optimistic update with no rollback on server failure
   const markAsRead = useCallback((id: number) => {
-    setEmails((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, read: true } : e))
+    setPosts((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, read: true } : p))
     );
-    markEmailReadOnServer(id);
+    markPostReadOnServer(id);
   }, []);
 
   // BUG 6: unreadCount recomputes on every render — should use useMemo
-  const unreadCount = emails.filter((e) => !e.read).length;
+  const unreadCount = posts.filter((p) => !p.read).length;
 
-  return { emails, loading, unreadCount, markAsRead };
+  return { posts, loading, unreadCount, markAsRead };
 }
