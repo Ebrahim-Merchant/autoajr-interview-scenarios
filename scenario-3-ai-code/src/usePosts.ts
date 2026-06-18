@@ -8,7 +8,7 @@ export type Post = {
   read: boolean;
 };
 
-// Simulates marking a post as read — 30% chance of failure
+// Simulates marking a post as read, with a chance of failure
 async function markPostReadOnServer(id: number): Promise<void> {
   await new Promise((r) => setTimeout(r, 200));
   if (Math.random() < 0.3) {
@@ -26,13 +26,11 @@ export function usePosts(userId: string) {
   useEffect(() => {
     setLoading(true);
 
-    // BUG 2: No AbortController — stale responses can overwrite newer ones
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         fetchCount++;
         console.log(`[API] fetchPosts for user ${userId} (total fetches: ${fetchCount})`);
-        // BUG 5: Blindly trusts API shape — no validation
         const mapped: Post[] = data.map((p: any) => ({
           id: p.id,
           userId: p.userId,
@@ -43,9 +41,7 @@ export function usePosts(userId: string) {
         setPosts(mapped);
         setLoading(false);
       });
-    // BUG 3: No .catch — if fetch fails, loading hangs forever
 
-    // BUG 1: interval return value never stored — never cleared = memory leak
     setInterval(() => {
       fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
         .then((res) => res.json())
@@ -64,7 +60,6 @@ export function usePosts(userId: string) {
     }, 5000);
   }, [userId]);
 
-  // BUG 4: Optimistic update with no rollback on server failure
   const markAsRead = useCallback((id: number) => {
     setPosts((prev) =>
       prev.map((p) => (p.id === id ? { ...p, read: true } : p))
@@ -72,7 +67,6 @@ export function usePosts(userId: string) {
     markPostReadOnServer(id);
   }, []);
 
-  // BUG 6: unreadCount recomputes on every render — should use useMemo
   const unreadCount = posts.filter((p) => !p.read).length;
 
   return { posts, loading, unreadCount, markAsRead };
