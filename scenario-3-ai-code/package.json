@@ -15,6 +15,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:api": "node api-server.js",
     "build": "tsc && vite build"
   }
 }

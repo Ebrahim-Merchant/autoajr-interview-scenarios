@@ -33,9 +33,48 @@ Things worth investigating:
 
 ## Setup
 
+This project uses a local API server (no external network required) and a React frontend served by Vite.
+
+### 1. Install dependencies
+
 ```bash
 npm install
+```
+
+### 2. Start the API server
+
+In one terminal:
+
+```bash
+npm run dev:api
+```
+
+The server starts at `http://localhost:3001`. It serves posts for user IDs 1-4 and simulates intermittent failures and variable response times that the client has been experiencing in production.
+
+### 3. Start the frontend
+
+In a second terminal:
+
+```bash
 npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build check
+
+```bash
+npm run build
+```
+
+### API
+
+```
+GET http://localhost:3001/posts?userId=1
+```
+
+Returns an array of posts for the given user. The server occasionally returns errors and has variable latency, consistent with the intermittent API failures reported by the client.
+
+## Notes
+
+Open the browser console and watch for API call counts and failures as you use the app. Try switching users quickly and leaving the tab open for 30 or more seconds.

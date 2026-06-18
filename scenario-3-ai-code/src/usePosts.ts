@@ -8,6 +8,8 @@ export type Post = {
   read: boolean;
 };
 
+const API_BASE = 'http://localhost:3001';
+
 // Simulates marking a post as read, with a chance of failure
 async function markPostReadOnServer(id: number): Promise<void> {
   await new Promise((r) => setTimeout(r, 200));
@@ -26,7 +28,7 @@ export function usePosts(userId: string) {
   useEffect(() => {
     setLoading(true);
 
-    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    fetch(`${API_BASE}/posts?userId=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         fetchCount++;
@@ -43,7 +45,7 @@ export function usePosts(userId: string) {
       });
 
     setInterval(() => {
-      fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+      fetch(`${API_BASE}/posts?userId=${userId}`)
         .then((res) => res.json())
         .then((data) => {
           fetchCount++;
